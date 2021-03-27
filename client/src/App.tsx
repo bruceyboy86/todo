@@ -27,6 +27,28 @@ const App: React.FC = () => {
       })
       .catch(err => console.log(err))
   }
+
+  const handleUpdateTodo = (todo: ITodo):void => {
+    updateTodo(todo)
+      .then(({status, data}) => {
+        if (status !== 200) {
+          throw new Error("Error! Todo not updated");
+        }
+        setTodos(data.todos)
+      })
+      .catch(err => console.log(err))
+  }
+
+  const handleDeleteTodo = (_id:string):void => {
+    deleteTodo(_id)
+      .then(({status, data}) => {
+        if (status !== 200) {
+          throw new Error("Error! Todo not deleted");
+        }
+        setTodos(data.todos)
+      })
+      .catch(err => console.log(err))
+  }
   return null
 }
 
